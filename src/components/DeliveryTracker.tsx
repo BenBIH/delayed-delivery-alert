@@ -39,7 +39,7 @@ const DeliveryTracker = ({ isOpen, onClose, lastStatusUpdate }: DeliveryTrackerP
     {
       id: 2,
       title: "Narudžba odobrena.",
-      icon: <CheckCircle className="w-5 h-5 text-success" />,
+      icon: <CheckCircle className="w-5 h-5 text-primary" />,
       completed: true,
       active: false,
     },
