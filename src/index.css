@@ -6,7 +6,8 @@
 
 @layer base {
   :root {
-    --background: 180 6% 93%;
+    /* OLX Brand Colors */
+    --background: 195 9% 93%;
     --foreground: 184 100% 10%;
 
     --card: 0 0% 100%;
@@ -18,26 +19,26 @@
     --primary: 184 100% 10%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 170 74% 52%;
+    --secondary: 176 76% 52%;
     --secondary-foreground: 184 100% 10%;
 
-    --muted: 180 6% 93%;
+    --muted: 195 9% 93%;
     --muted-foreground: 184 30% 35%;
 
-    --accent: 170 74% 52%;
-    --accent-foreground: 184 100% 10%;
+    --accent: 178 100% 32%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 339 80% 37%;
+    --destructive: 343 81% 38%;
     --destructive-foreground: 0 0% 100%;
 
-    --warning: 45 100% 60%;
+    --warning: 46 100% 60%;
     --warning-foreground: 184 100% 10%;
 
-    --success: 170 74% 52%;
-    --success-foreground: 184 100% 10%;
+    --success: 178 100% 32%;
+    --success-foreground: 0 0% 100%;
 
-    --border: 180 10% 85%;
-    --input: 180 10% 85%;
+    --border: 195 9% 85%;
+    --input: 195 9% 85%;
     --ring: 184 100% 10%;
 
     --radius: 0.5rem;
@@ -46,10 +47,10 @@
     --sidebar-foreground: 184 100% 10%;
     --sidebar-primary: 184 100% 10%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 180 6% 93%;
+    --sidebar-accent: 195 9% 93%;
     --sidebar-accent-foreground: 184 100% 10%;
-    --sidebar-border: 180 10% 85%;
-    --sidebar-ring: 170 74% 52%;
+    --sidebar-border: 195 9% 85%;
+    --sidebar-ring: 176 76% 52%;
   }
 
   .dark {
@@ -62,36 +63,36 @@
     --popover: 184 60% 14%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 170 74% 52%;
+    --primary: 176 76% 52%;
     --primary-foreground: 184 100% 10%;
 
-    --secondary: 170 74% 52%;
+    --secondary: 176 76% 52%;
     --secondary-foreground: 184 100% 10%;
 
     --muted: 184 50% 18%;
     --muted-foreground: 180 10% 60%;
 
-    --accent: 170 74% 52%;
-    --accent-foreground: 184 100% 10%;
+    --accent: 178 100% 32%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 339 80% 37%;
+    --destructive: 343 81% 38%;
     --destructive-foreground: 0 0% 95%;
 
-    --warning: 45 100% 60%;
+    --warning: 46 100% 60%;
     --warning-foreground: 184 100% 10%;
 
     --border: 184 40% 20%;
     --input: 184 40% 20%;
-    --ring: 170 74% 52%;
+    --ring: 176 76% 52%;
 
     --sidebar-background: 184 100% 10%;
     --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 170 74% 52%;
+    --sidebar-primary: 176 76% 52%;
     --sidebar-primary-foreground: 184 100% 10%;
     --sidebar-accent: 184 50% 18%;
     --sidebar-accent-foreground: 0 0% 95%;
     --sidebar-border: 184 40% 20%;
-    --sidebar-ring: 170 74% 52%;
+    --sidebar-ring: 176 76% 52%;
   }
 }
 
