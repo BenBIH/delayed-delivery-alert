@@ -89,14 +89,13 @@ const DeliveryTracker = ({ isOpen, onClose, lastStatusUpdate }: DeliveryTrackerP
           {/* Timeline */}
           <div className="relative">
             {steps.map((step, index) => (
-              <div key={step.id} className="flex items-start gap-4 relative">
+              <div key={step.id} className="flex items-start gap-4 relative mb-6 last:mb-0">
                 {/* Vertical line */}
                 {index < steps.length - 1 && (
                   <div
-                    className={`absolute left-6 top-12 w-0.5 h-12 ${
+                    className={`absolute left-6 top-12 w-0.5 bottom-0 -mb-6 ${
                       step.completed ? "bg-primary" : "bg-border"
                     }`}
-                    style={{ borderStyle: "dashed" }}
                   />
                 )}
 
@@ -114,7 +113,7 @@ const DeliveryTracker = ({ isOpen, onClose, lastStatusUpdate }: DeliveryTrackerP
                 </div>
 
                 {/* Text */}
-                <div className="flex-1 pb-8">
+                <div className="flex-1 min-h-[48px] flex items-center">
                   <p
                     className={`text-sm leading-relaxed ${
                       step.completed || step.active
