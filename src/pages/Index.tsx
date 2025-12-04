@@ -1,8 +1,10 @@
 import { useState } from "react";
 import DeliveryTracker from "@/components/DeliveryTracker";
+import OrderForm from "@/components/OrderForm";
 
 const Index = () => {
-  const [isTrackerOpen, setIsTrackerOpen] = useState(true);
+  const [isTrackerOpen, setIsTrackerOpen] = useState(false);
+  const [isOrderFormOpen, setIsOrderFormOpen] = useState(true);
 
   // Simulacija - datum zadnje izmjene statusa (postavljen na 4 dana unazad za demo)
   const lastStatusUpdate = new Date(Date.now() - 4 * 24 * 60 * 60 * 1000);
@@ -42,12 +44,20 @@ const Index = () => {
           </div>
         </div>
 
-        <button
-          onClick={() => setIsTrackerOpen(true)}
-          className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors"
-        >
-          Otvori praćenje pošiljke
-        </button>
+        <div className="flex gap-3">
+          <button
+            onClick={() => setIsTrackerOpen(true)}
+            className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors"
+          >
+            Otvori praćenje pošiljke
+          </button>
+          <button
+            onClick={() => setIsOrderFormOpen(true)}
+            className="bg-secondary text-secondary-foreground px-6 py-3 rounded-lg font-medium hover:bg-secondary/90 transition-colors"
+          >
+            Naruči artikal
+          </button>
+        </div>
       </div>
 
       {/* Delivery Tracker Modal */}
@@ -55,6 +65,12 @@ const Index = () => {
         isOpen={isTrackerOpen}
         onClose={() => setIsTrackerOpen(false)}
         lastStatusUpdate={lastStatusUpdate}
+      />
+
+      {/* Order Form Modal */}
+      <OrderForm
+        isOpen={isOrderFormOpen}
+        onClose={() => setIsOrderFormOpen(false)}
       />
     </div>
   );
