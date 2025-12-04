@@ -4,7 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-
+import OrderConfirmation from "./OrderConfirmation";
+import { toast } from "@/hooks/use-toast";
 interface SavedAddress {
   id: string;
   name: string;
@@ -41,7 +42,24 @@ const OrderForm = ({
   });
   const [hideProductName, setHideProductName] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
+  const deliveryPrice = 11;
+  const productPriceNum = parseFloat(productPrice.replace(",", ".").replace(/[^\d.]/g, ""));
+  const totalPrice = (productPriceNum + deliveryPrice).toFixed(2).replace(".", ",") + " KM";
+
+  const handleContinue = () => {
+    setShowConfirmation(true);
+  };
+
+  const handleConfirmOrder = () => {
+    setShowConfirmation(false);
+    onClose();
+    toast({
+      title: "Narudžba uspješna!",
+      description: "Vaša narudžba je uspješno poslana.",
+    });
+  };
   const savedAddresses: SavedAddress[] = [
     {
       id: "1",
@@ -290,10 +308,20 @@ const OrderForm = ({
             className="w-full h-12 text-base font-medium"
             variant="outline"
             disabled={!acceptTerms}
+            onClick={handleContinue}
           >
             Nastavi
           </Button>
         </div>
+
+        {/* Confirmation Modal */}
+        <OrderConfirmation
+          isOpen={showConfirmation}
+          onClose={() => setShowConfirmation(false)}
+          onConfirm={handleConfirmOrder}
+          totalPrice={totalPrice}
+          deliveryService="BH Post Express"
+        />
       </div>
     </div>
   );
