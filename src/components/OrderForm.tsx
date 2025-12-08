@@ -114,8 +114,8 @@ const OrderForm = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-foreground/50 flex items-center justify-center z-50 p-4 overflow-y-auto">
-      <div className="bg-card rounded-lg shadow-xl max-w-2xl w-full my-8 overflow-hidden">
+    <div className="fixed inset-0 bg-foreground/50 flex items-start justify-center z-50 p-4 overflow-y-auto">
+      <div className="bg-card rounded-lg shadow-xl max-w-2xl w-full my-4 overflow-hidden flex-shrink-0">
         {/* Header */}
         <div className="bg-primary px-6 py-4 flex items-center justify-between">
           <h2 className="text-primary-foreground font-semibold text-lg">
