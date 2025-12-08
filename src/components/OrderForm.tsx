@@ -44,6 +44,7 @@ const OrderForm = ({
   const [hideProductName, setHideProductName] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [activeNoteTab, setActiveNoteTab] = useState<"seller" | "courier">("seller");
 
   const sellerPriceList = [
     { weight: "Do 10 kg", price: 20 },
@@ -304,28 +305,55 @@ const OrderForm = ({
               </div>
             </div>
 
-            <div className="space-y-1">
-              <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Napomena prodavaču</label>
-              <Textarea
-                value={formData.sellerNote}
-                onChange={(e) => handleInputChange("sellerNote", e.target.value.slice(0, 200))}
-                placeholder="Napomena..."
-                className="bg-muted/30 border-border focus:border-primary resize-none min-h-[80px]"
-                maxLength={200}
-              />
-              <p className="text-xs text-primary">{formData.sellerNote.length} / 200</p>
-            </div>
-
-            <div className="space-y-1">
-              <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Napomena kurirskoj službi</label>
-              <Textarea
-                value={formData.courierNote}
-                onChange={(e) => handleInputChange("courierNote", e.target.value.slice(0, 200))}
-                placeholder="Napomena..."
-                className="bg-muted/30 border-border focus:border-primary resize-none min-h-[80px]"
-                maxLength={200}
-              />
-              <p className="text-xs text-primary">{formData.courierNote.length} / 200</p>
+            <div className="space-y-2">
+              <div className="flex rounded-lg overflow-hidden border border-border">
+                <button
+                  type="button"
+                  onClick={() => setActiveNoteTab("seller")}
+                  className={`flex-1 py-2 px-4 text-sm font-medium transition-colors ${
+                    activeNoteTab === "seller"
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-muted/30 text-muted-foreground hover:bg-muted/50"
+                  }`}
+                >
+                  Napomena prodavaču
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveNoteTab("courier")}
+                  className={`flex-1 py-2 px-4 text-sm font-medium transition-colors ${
+                    activeNoteTab === "courier"
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-muted/30 text-muted-foreground hover:bg-muted/50"
+                  }`}
+                >
+                  Napomena kuriru
+                </button>
+              </div>
+              
+              {activeNoteTab === "seller" ? (
+                <div className="space-y-1">
+                  <Textarea
+                    value={formData.sellerNote}
+                    onChange={(e) => handleInputChange("sellerNote", e.target.value.slice(0, 200))}
+                    placeholder="Napomena za prodavača..."
+                    className="bg-muted/30 border-border focus:border-primary resize-none min-h-[80px]"
+                    maxLength={200}
+                  />
+                  <p className="text-xs text-primary">{formData.sellerNote.length} / 200</p>
+                </div>
+              ) : (
+                <div className="space-y-1">
+                  <Textarea
+                    value={formData.courierNote}
+                    onChange={(e) => handleInputChange("courierNote", e.target.value.slice(0, 200))}
+                    placeholder="Napomena za kurirsku službu..."
+                    className="bg-muted/30 border-border focus:border-primary resize-none min-h-[80px]"
+                    maxLength={200}
+                  />
+                  <p className="text-xs text-primary">{formData.courierNote.length} / 200</p>
+                </div>
+              )}
             </div>
           </div>
 
