@@ -388,14 +388,14 @@ const OrderForm = ({
           </div>
 
           {/* Submit button */}
-          <button
-            type="button"
+          <Button
+            className="w-full h-12 text-base font-medium"
+            variant="outline"
             disabled={!acceptTerms}
             onClick={handleContinue}
-            className="h-12 w-fit min-w-fit flex flex-row items-center justify-center rounded px-4 border-2 border-primary text-primary font-medium text-[15px] leading-[1.25] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary hover:text-primary-foreground transition-colors"
           >
             Nastavi
-          </button>
+          </Button>
         </div>
 
         {/* Confirmation Modal */}
