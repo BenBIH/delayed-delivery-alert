@@ -31,6 +31,7 @@ const OrderForm = ({
   productImage
 }: OrderFormProps) => {
   const [selectedAddress, setSelectedAddress] = useState<string | null>("1");
+  const [selectedDelivery, setSelectedDelivery] = useState<"bhpost" | "seller">("bhpost");
   const [formData, setFormData] = useState({
     name: "",
     address: "",
@@ -44,9 +45,19 @@ const OrderForm = ({
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
 
-  const deliveryPrice = 11;
+  const sellerPriceList = [
+    { weight: "Do 10 kg", price: 20 },
+    { weight: "10 do 20 kg", price: 30 },
+    { weight: "20 do 30 kg", price: 40 },
+    { weight: "30 do 40 kg", price: 50 },
+    { weight: "40 do 50 kg", price: 60 },
+    { weight: "Preko 50 kg", price: 70 },
+  ];
+
+  const deliveryPrice = selectedDelivery === "bhpost" ? 11 : 20;
   const productPriceNum = parseFloat(productPrice.replace(",", ".").replace(/[^\d.]/g, ""));
   const totalPrice = (productPriceNum + deliveryPrice).toFixed(2).replace(".", ",") + " KM";
+  const deliveryServiceName = selectedDelivery === "bhpost" ? "BH Post Express" : "Dostava po izboru prodavača";
 
   const handleContinue = () => {
     setShowConfirmation(true);
@@ -145,11 +156,20 @@ const OrderForm = ({
           <div className="space-y-3">
             <h3 className="font-medium text-foreground">Izaberite dostavu</h3>
 
-            <div className="border border-border rounded-lg p-4">
+            <button
+              onClick={() => setSelectedDelivery("bhpost")}
+              className={`w-full border rounded-lg p-4 text-left transition-all ${
+                selectedDelivery === "bhpost"
+                  ? "border-primary bg-primary/5 ring-2 ring-primary/20"
+                  : "border-border hover:border-primary/50"
+              }`}
+            >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center">
-                    <Check className="w-3 h-3 text-primary-foreground" />
+                  <div className={`w-5 h-5 rounded-full flex items-center justify-center ${
+                    selectedDelivery === "bhpost" ? "bg-primary" : "border-2 border-primary"
+                  }`}>
+                    {selectedDelivery === "bhpost" && <Check className="w-3 h-3 text-primary-foreground" />}
                   </div>
                   <div>
                     <p className="font-medium text-foreground">BH Post Express</p>
@@ -158,21 +178,46 @@ const OrderForm = ({
                 </div>
                 <p className="font-semibold text-foreground">11 KM</p>
               </div>
-            </div>
+            </button>
 
-            <div className="border border-border rounded-lg p-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center">
-                    <Check className="w-3 h-3 text-primary opacity-0" />
+            <div>
+              <button
+                onClick={() => setSelectedDelivery("seller")}
+                className={`w-full border rounded-lg p-4 text-left transition-all ${
+                  selectedDelivery === "seller"
+                    ? "border-primary bg-primary/5 ring-2 ring-primary/20 rounded-b-none"
+                    : "border-border hover:border-primary/50"
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-5 h-5 rounded-full flex items-center justify-center ${
+                      selectedDelivery === "seller" ? "bg-primary" : "border-2 border-primary"
+                    }`}>
+                      {selectedDelivery === "seller" && <Check className="w-3 h-3 text-primary-foreground" />}
+                    </div>
+                    <div>
+                      <p className="font-medium text-foreground">Dostava po izboru prodavača</p>
+                      <p className="text-sm text-muted-foreground">Organizacija dostave lično ili posredstvom kurirskih službi</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-medium text-foreground">Dostava po izboru prodavača</p>
-                    <p className="text-sm text-muted-foreground">Organizacija dostave lično ili posredstvom kurirskih službi</p>
+                  <p className="font-semibold text-foreground">20 KM</p>
+                </div>
+              </button>
+
+              {selectedDelivery === "seller" && (
+                <div className="bg-muted/50 border border-t-0 border-primary rounded-b-lg p-4">
+                  <p className="text-sm font-medium text-foreground mb-3">Cjenovnik dostave</p>
+                  <div className="grid grid-cols-3 gap-2">
+                    {sellerPriceList.map((item) => (
+                      <div key={item.weight} className="bg-card shadow-sm rounded-md p-3">
+                        <span className="text-xs font-medium text-muted-foreground block">{item.weight}</span>
+                        <span className="font-semibold text-foreground">{item.price}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
-                <p className="font-semibold text-foreground">20 KM</p>
-              </div>
+              )}
             </div>
           </div>
 
@@ -331,7 +376,7 @@ const OrderForm = ({
           onClose={() => setShowConfirmation(false)}
           onConfirm={handleConfirmOrder}
           totalPrice={totalPrice}
-          deliveryService="BH Post Express"
+          deliveryService={deliveryServiceName}
         />
       </div>
     </div>
