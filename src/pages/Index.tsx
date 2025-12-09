@@ -1,10 +1,12 @@
 import { useState } from "react";
 import DeliveryTracker from "@/components/DeliveryTracker";
 import OrderForm from "@/components/OrderForm";
+import OrderApproval from "@/components/OrderApproval";
 
 const Index = () => {
   const [isTrackerOpen, setIsTrackerOpen] = useState(false);
-  const [isOrderFormOpen, setIsOrderFormOpen] = useState(true);
+  const [isOrderFormOpen, setIsOrderFormOpen] = useState(false);
+  const [isOrderApprovalOpen, setIsOrderApprovalOpen] = useState(true);
 
   // Simulacija - datum zadnje izmjene statusa (postavljen na 4 dana unazad za demo)
   const lastStatusUpdate = new Date(Date.now() - 4 * 24 * 60 * 60 * 1000);
@@ -44,7 +46,7 @@ const Index = () => {
           </div>
         </div>
 
-        <div className="flex gap-3">
+        <div className="flex gap-3 flex-wrap">
           <button
             onClick={() => setIsTrackerOpen(true)}
             className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors"
@@ -56,6 +58,12 @@ const Index = () => {
             className="bg-secondary text-secondary-foreground px-6 py-3 rounded-lg font-medium hover:bg-secondary/90 transition-colors"
           >
             Naruči artikal
+          </button>
+          <button
+            onClick={() => setIsOrderApprovalOpen(true)}
+            className="bg-accent text-accent-foreground px-6 py-3 rounded-lg font-medium hover:bg-accent/90 transition-colors"
+          >
+            Potvrdi narudžbu
           </button>
         </div>
       </div>
@@ -71,6 +79,12 @@ const Index = () => {
       <OrderForm
         isOpen={isOrderFormOpen}
         onClose={() => setIsOrderFormOpen(false)}
+      />
+
+      {/* Order Approval Modal */}
+      <OrderApproval
+        isOpen={isOrderApprovalOpen}
+        onClose={() => setIsOrderApprovalOpen(false)}
       />
     </div>
   );
