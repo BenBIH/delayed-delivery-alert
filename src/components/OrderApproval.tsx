@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { X, Plus, Info, Truck } from "lucide-react";
+import { X, Plus, Info, Truck, Package } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { toast } from "@/hooks/use-toast";
-
 interface SavedAddress {
   id: string;
   name: string;
@@ -26,6 +25,7 @@ interface OrderApprovalProps {
   onClose: () => void;
   productName?: string;
   productPrice?: string;
+  productImage?: string;
   buyerNote?: string;
   recipientData?: RecipientData;
 }
@@ -35,6 +35,7 @@ const OrderApproval = ({
   onClose,
   productName = "Klima INVERTER 12 VIVAX ACP-12CH35AERI AERI 12ka -25 A+++",
   productPrice = "999 KM",
+  productImage,
   buyerNote = "",
   recipientData = { name: "Ime i prezime", username: null, city: "Sarajevo" }
 }: OrderApprovalProps) => {
@@ -123,13 +124,26 @@ const OrderApproval = ({
 
         {!showConfirmation ? (
           <div className="p-6 space-y-6">
-            {/* Product info (Oglas) */}
-            <div className="space-y-2">
-              <h3 className="font-medium text-muted-foreground">Oglas</h3>
-              <div className="flex items-center justify-between py-2">
-                <p className="font-semibold text-foreground flex-1 pr-4">{productName}</p>
-                <p className="font-semibold text-foreground whitespace-nowrap">{productPrice}</p>
+            {/* Product info with image */}
+            <div className="bg-muted/50 rounded-lg p-4 flex items-center gap-4">
+              <div className="w-16 h-16 bg-muted rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0">
+                {productImage ? (
+                  <img src={productImage} alt={productName} className="w-full h-full object-cover" />
+                ) : (
+                  <Package className="w-8 h-8 text-muted-foreground" />
+                )}
               </div>
+              <div className="flex-1 min-w-0">
+                <p className="font-medium text-foreground truncate">{productName}</p>
+                <p className="text-lg font-semibold text-primary">{productPrice}</p>
+              </div>
+            </div>
+
+            {/* OLX brza dostava info */}
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Truck className="w-4 h-4 text-secondary" />
+              <span>Šta je OLX brza dostava</span>
+              <a href="#" className="text-primary hover:underline font-medium">Vidi više</a>
             </div>
 
             {/* Buyer's note */}
