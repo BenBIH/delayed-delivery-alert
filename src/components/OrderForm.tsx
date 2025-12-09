@@ -155,6 +155,11 @@ const OrderForm = ({
 
           {/* Delivery info */}
           <div className="space-y-3">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Truck className="w-4 h-4 text-secondary" />
+              <span>Šta je OLX brza dostava</span>
+              <a href="#" className="text-primary hover:underline font-medium">Vidi više</a>
+            </div>
             <h3 className="font-medium text-foreground">Izaberite dostavu</h3>
 
             <button
@@ -221,11 +226,6 @@ const OrderForm = ({
               )}
             </div>
 
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Truck className="w-4 h-4 text-secondary" />
-              <span>Šta je OLX brza dostava</span>
-              <a href="#" className="text-primary hover:underline font-medium">Vidi više</a>
-            </div>
           </div>
 
           {/* Address selection */}
