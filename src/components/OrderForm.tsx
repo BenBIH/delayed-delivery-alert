@@ -220,6 +220,12 @@ const OrderForm = ({
                 </div>
               )}
             </div>
+
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Truck className="w-4 h-4 text-secondary" />
+              <span>Šta je OLX brza dostava</span>
+              <a href="#" className="text-primary hover:underline font-medium">Vidi više</a>
+            </div>
           </div>
 
           {/* Address selection */}
