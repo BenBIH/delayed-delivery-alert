@@ -6,6 +6,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { toast } from "@/hooks/use-toast";
+import AddAddressModal from "./AddAddressModal";
 
 interface SavedAddress {
   id: string;
@@ -14,6 +15,7 @@ interface SavedAddress {
   phone: string;
   address: string;
   city: string;
+  isPrimary?: boolean;
 }
 
 interface SendArticleProps {
@@ -58,17 +60,9 @@ const SendArticle = ({
   const [isFragile, setIsFragile] = useState(false);
   const [allowInspection, setAllowInspection] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
+  const [showAddAddressModal, setShowAddAddressModal] = useState(false);
 
-  const sellerPriceList = [
-    { weight: "Do 10 kg", price: 20 },
-    { weight: "10 do 20 kg", price: 30 },
-    { weight: "20 do 30 kg", price: 40 },
-    { weight: "30 do 40 kg", price: 50 },
-    { weight: "40 do 50 kg", price: 60 },
-    { weight: "Preko 50 kg", price: 70 },
-  ];
-
-  const savedAddresses: SavedAddress[] = [
+  const [savedAddresses, setSavedAddresses] = useState<SavedAddress[]>([
     {
       id: "1",
       name: "Be be",
@@ -85,6 +79,15 @@ const SendArticle = ({
       address: "I'm not sure what",
       city: "Zenica - dostava",
     },
+  ]);
+
+  const sellerPriceList = [
+    { weight: "Do 10 kg", price: 20 },
+    { weight: "10 do 20 kg", price: 30 },
+    { weight: "20 do 30 kg", price: 40 },
+    { weight: "30 do 40 kg", price: 50 },
+    { weight: "40 do 50 kg", price: 60 },
+    { weight: "Preko 50 kg", price: 70 },
   ];
 
   const handleAddressSelect = (addressId: string) => {
@@ -111,6 +114,31 @@ const SendArticle = ({
     toast({
       title: "Oglas uspješno poslan!",
       description: "Vaš oglas je spreman za dostavu.",
+    });
+  };
+
+  const handleAddAddress = (address: { id: string; name: string; phone: string; address: string; city: string; postalCode: string; isPrimary: boolean }) => {
+    const newAddress: SavedAddress = {
+      id: address.id,
+      name: address.name,
+      postalCode: address.postalCode,
+      phone: address.phone,
+      address: address.address,
+      city: address.city,
+      isPrimary: address.isPrimary,
+    };
+    setSavedAddresses(prev => [...prev, newAddress]);
+    setSelectedAddress(newAddress.id);
+    setSellerData({
+      name: newAddress.name,
+      address: newAddress.address,
+      phone: newAddress.phone,
+      city: newAddress.city,
+      postalCode: newAddress.postalCode,
+    });
+    toast({
+      title: "Adresa dodana!",
+      description: "Nova adresa je uspješno dodana.",
     });
   };
 
@@ -271,7 +299,10 @@ const SendArticle = ({
                     <p className="text-xs text-muted-foreground">Grad: <span className="text-foreground font-medium">{addr.city}</span></p>
                   </button>
                 ))}
-                <button className="p-3 rounded-lg border border-dashed border-border hover:border-primary hover:bg-muted/30 flex flex-col items-center justify-center gap-2 transition-all min-h-[120px]">
+                <button 
+                  onClick={() => setShowAddAddressModal(true)}
+                  className="p-3 rounded-lg border border-dashed border-border hover:border-primary hover:bg-muted/30 flex flex-col items-center justify-center gap-2 transition-all min-h-[120px]"
+                >
                   <Plus className="w-6 h-6 text-muted-foreground" />
                   <span className="text-sm text-muted-foreground">Dodaj ili promijeni adresu</span>
                 </button>
@@ -535,6 +566,13 @@ const SendArticle = ({
           </div>
         )}
       </div>
+
+      {/* Add Address Modal */}
+      <AddAddressModal
+        isOpen={showAddAddressModal}
+        onClose={() => setShowAddAddressModal(false)}
+        onAddAddress={handleAddAddress}
+      />
     </div>
   );
 };
