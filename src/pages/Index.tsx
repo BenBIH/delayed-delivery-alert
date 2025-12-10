@@ -2,11 +2,13 @@ import { useState } from "react";
 import DeliveryTracker from "@/components/DeliveryTracker";
 import OrderForm from "@/components/OrderForm";
 import OrderApproval from "@/components/OrderApproval";
+import SendArticle from "@/components/SendArticle";
 
 const Index = () => {
   const [isTrackerOpen, setIsTrackerOpen] = useState(false);
   const [isOrderFormOpen, setIsOrderFormOpen] = useState(false);
-  const [isOrderApprovalOpen, setIsOrderApprovalOpen] = useState(true);
+  const [isOrderApprovalOpen, setIsOrderApprovalOpen] = useState(false);
+  const [isSendArticleOpen, setIsSendArticleOpen] = useState(true);
 
   // Simulacija - datum zadnje izmjene statusa (postavljen na 4 dana unazad za demo)
   const lastStatusUpdate = new Date(Date.now() - 4 * 24 * 60 * 60 * 1000);
@@ -65,6 +67,12 @@ const Index = () => {
           >
             Potvrdi narudžbu
           </button>
+          <button
+            onClick={() => setIsSendArticleOpen(true)}
+            className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors"
+          >
+            Pošalji artikal
+          </button>
         </div>
       </div>
 
@@ -85,6 +93,12 @@ const Index = () => {
       <OrderApproval
         isOpen={isOrderApprovalOpen}
         onClose={() => setIsOrderApprovalOpen(false)}
+      />
+
+      {/* Send Article Modal */}
+      <SendArticle
+        isOpen={isSendArticleOpen}
+        onClose={() => setIsSendArticleOpen(false)}
       />
     </div>
   );
