@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X } from "lucide-react";
+import { X, MapPin } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -63,12 +63,15 @@ const AddAddressModal = ({ isOpen, onClose, onAddAddress }: AddAddressModalProps
 
   return (
     <div className="fixed inset-0 bg-foreground/50 flex items-center justify-center z-[60] p-4">
-      <div className="bg-card rounded-lg shadow-xl max-w-lg w-full overflow-hidden">
+      <div className="bg-card rounded-lg shadow-xl max-w-lg w-full overflow-hidden animate-scale-in">
         {/* Header */}
         <div className="bg-primary px-6 py-4 flex items-center justify-between">
-          <h2 className="text-primary-foreground font-semibold text-lg">
-            Dodaj novu adresu
-          </h2>
+          <div className="flex items-center gap-3">
+            <MapPin className="w-5 h-5 text-primary-foreground" />
+            <h2 className="text-primary-foreground font-semibold text-lg">
+              Dodaj novu adresu
+            </h2>
+          </div>
           <button
             onClick={onClose}
             className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
@@ -77,10 +80,10 @@ const AddAddressModal = ({ isOpen, onClose, onAddAddress }: AddAddressModalProps
           </button>
         </div>
 
-        <div className="p-6 space-y-4">
-          {/* Name and Phone */}
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-1">
+        <div className="p-6 space-y-5">
+          {/* Name and Phone - 2 columns */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-2">
               <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
                 Ime i prezime
               </label>
@@ -88,10 +91,10 @@ const AddAddressModal = ({ isOpen, onClose, onAddAddress }: AddAddressModalProps
                 value={formData.name}
                 onChange={(e) => handleInputChange("name", e.target.value)}
                 placeholder="Unesite ime i prezime"
-                className="bg-muted/30 border-border focus:border-primary"
+                className="bg-muted/30 border-border focus:border-primary h-11"
               />
             </div>
-            <div className="space-y-1">
+            <div className="space-y-2">
               <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
                 Broj telefona
               </label>
@@ -99,13 +102,14 @@ const AddAddressModal = ({ isOpen, onClose, onAddAddress }: AddAddressModalProps
                 value={formData.phone}
                 onChange={(e) => handleInputChange("phone", e.target.value)}
                 placeholder="+38X XX XXX XXX"
-                className="bg-muted/30 border-border focus:border-primary"
+                type="tel"
+                className="bg-muted/30 border-border focus:border-primary h-11"
               />
             </div>
           </div>
 
-          {/* Address */}
-          <div className="space-y-1">
+          {/* Address - full width */}
+          <div className="space-y-2">
             <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
               Adresa
             </label>
@@ -113,13 +117,13 @@ const AddAddressModal = ({ isOpen, onClose, onAddAddress }: AddAddressModalProps
               value={formData.address}
               onChange={(e) => handleInputChange("address", e.target.value)}
               placeholder="Unesite adresu"
-              className="bg-muted/30 border-border focus:border-primary"
+              className="bg-muted/30 border-border focus:border-primary h-11"
             />
           </div>
 
-          {/* City and Postal Code */}
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-1">
+          {/* City and Postal Code - 2 columns */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-2">
               <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
                 Grad
               </label>
@@ -127,10 +131,10 @@ const AddAddressModal = ({ isOpen, onClose, onAddAddress }: AddAddressModalProps
                 value={formData.city}
                 onChange={(e) => handleInputChange("city", e.target.value)}
                 placeholder="Izaberi grad"
-                className="bg-muted/30 border-border focus:border-primary"
+                className="bg-muted/30 border-border focus:border-primary h-11"
               />
             </div>
-            <div className="space-y-1">
+            <div className="space-y-2">
               <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
                 Poštanski broj
               </label>
@@ -138,12 +142,12 @@ const AddAddressModal = ({ isOpen, onClose, onAddAddress }: AddAddressModalProps
                 value={formData.postalCode}
                 onChange={(e) => handleInputChange("postalCode", e.target.value)}
                 placeholder="00000"
-                className="bg-muted/30 border-border focus:border-primary"
+                className="bg-muted/30 border-border focus:border-primary h-11"
               />
             </div>
           </div>
 
-          {/* Primary Address */}
+          {/* Primary Address - horizontal radio */}
           <div className="space-y-3">
             <label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
               Primarna adresa
@@ -151,16 +155,24 @@ const AddAddressModal = ({ isOpen, onClose, onAddAddress }: AddAddressModalProps
             <RadioGroup
               value={isPrimary}
               onValueChange={(value) => setIsPrimary(value as "yes" | "no")}
-              className="space-y-2"
+              className="flex gap-6"
             >
-              <div className="flex items-center gap-3">
-                <RadioGroupItem value="yes" id="primary-yes" className="border-primary text-primary" />
+              <div className="flex items-center gap-2">
+                <RadioGroupItem 
+                  value="yes" 
+                  id="primary-yes" 
+                  className="border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground" 
+                />
                 <label htmlFor="primary-yes" className="text-sm text-foreground cursor-pointer">
                   Da
                 </label>
               </div>
-              <div className="flex items-center gap-3">
-                <RadioGroupItem value="no" id="primary-no" className="border-primary text-primary" />
+              <div className="flex items-center gap-2">
+                <RadioGroupItem 
+                  value="no" 
+                  id="primary-no" 
+                  className="border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground" 
+                />
                 <label htmlFor="primary-no" className="text-sm text-foreground cursor-pointer">
                   Ne
                 </label>
@@ -170,7 +182,7 @@ const AddAddressModal = ({ isOpen, onClose, onAddAddress }: AddAddressModalProps
 
           {/* Submit button */}
           <Button
-            className="w-full h-12 text-base font-medium"
+            className="w-full h-12 text-base font-medium mt-2"
             disabled={!isFormValid}
             onClick={handleSubmit}
           >
