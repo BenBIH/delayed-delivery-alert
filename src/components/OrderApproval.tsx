@@ -5,6 +5,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { toast } from "@/hooks/use-toast";
+import deliveryTruck from "@/assets/delivery-truck.svg";
 interface SavedAddress {
   id: string;
   name: string;
@@ -146,33 +147,6 @@ const OrderApproval = ({
               <a href="#" className="text-primary hover:underline font-medium">Vidi više</a>
             </div>
 
-            {/* Buyer's note */}
-            {buyerNote && (
-              <div className="space-y-2">
-                <h3 className="font-medium text-muted-foreground">Napomena kupca:</h3>
-                <p className="text-foreground">{buyerNote}</p>
-              </div>
-            )}
-
-            {/* Shipping cost responsibility */}
-            <div className="space-y-3">
-              <h3 className="font-medium text-foreground">Ko snosi troškove dostave</h3>
-              <RadioGroup
-                value={shippingPayer}
-                onValueChange={(value) => setShippingPayer(value as "seller" | "buyer")}
-                className="flex gap-8"
-              >
-                <div className="flex items-center gap-2">
-                  <RadioGroupItem value="seller" id="seller" />
-                  <label htmlFor="seller" className="text-foreground cursor-pointer">Prodavač</label>
-                </div>
-                <div className="flex items-center gap-2">
-                  <RadioGroupItem value="buyer" id="buyer" />
-                  <label htmlFor="buyer" className="text-foreground cursor-pointer">Kupac</label>
-                </div>
-              </RadioGroup>
-            </div>
-
             {/* OLX Garancija */}
             <div className="bg-warning/20 border border-warning/30 rounded-lg p-4">
               <h4 className="font-bold text-sm text-warning-foreground">OLX GARANCIJA</h4>
@@ -297,6 +271,8 @@ const OrderApproval = ({
                 <p>Primaoc: <span className="text-foreground">{recipientData.name}</span></p>
                 <p>Korisničko ime: <span className="text-foreground">{recipientData.username || "null"}</span></p>
                 <p>Grad: <span className="text-foreground">{recipientData.city}</span></p>
+                <p>Napomena kupca: <span className="text-foreground">{buyerNote || "-"}</span></p>
+                <p>Ko snosi troškove dostave: <span className="text-foreground">{shippingPayer === "buyer" ? "Kupac" : "Prodavač"}</span></p>
               </div>
             </div>
 
@@ -335,8 +311,8 @@ const OrderApproval = ({
           /* Confirmation Modal Content */
           <div className="p-6 flex flex-col items-center text-center space-y-6">
             {/* Delivery truck icon */}
-            <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center">
-              <Truck className="w-12 h-12 text-primary" />
+            <div className="flex justify-center py-4">
+              <img src={deliveryTruck} alt="Delivery truck" className="w-24 h-auto" />
             </div>
 
             <div className="space-y-2">
