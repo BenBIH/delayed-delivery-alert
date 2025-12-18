@@ -50,6 +50,10 @@ export default {
           DEFAULT: "hsl(var(--success))",
           foreground: "hsl(var(--success-foreground))",
         },
+        info: {
+          DEFAULT: "hsl(var(--info))",
+          foreground: "hsl(var(--info-foreground))",
+        },
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
@@ -67,6 +71,23 @@ export default {
           "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
+        },
+        // OLX Brand Colors
+        olx: {
+          navy: "hsl(var(--olx-navy))",
+          "royal-blue": "hsl(var(--olx-royal-blue))",
+          turquoise: "hsl(var(--olx-turquoise))",
+          rose: "hsl(var(--olx-rose))",
+          tan: "hsl(var(--olx-tan))",
+          "bright-blue": "hsl(var(--olx-bright-blue))",
+          cyan: "hsl(var(--olx-cyan))",
+          orange: "hsl(var(--olx-orange))",
+          yellow: "hsl(var(--olx-yellow))",
+          "light-grey": "hsl(var(--olx-light-grey))",
+          "light-blue": "hsl(var(--olx-light-blue))",
+          "light-cyan": "hsl(var(--olx-light-cyan))",
+          "light-peach": "hsl(var(--olx-light-peach))",
+          "light-yellow": "hsl(var(--olx-light-yellow))",
         },
       },
       borderRadius: {
@@ -87,11 +108,29 @@ export default {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0.7" },
         },
+        "fade-in": {
+          from: { opacity: "0", transform: "translateY(10px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "scale-in": {
+          from: { opacity: "0", transform: "scale(0.95)" },
+          to: { opacity: "1", transform: "scale(1)" },
+        },
+        shimmer: {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "pulse-warning": "pulse-warning 2s ease-in-out infinite",
+        "fade-in": "fade-in 0.3s ease-out",
+        "scale-in": "scale-in 0.2s ease-out",
+        shimmer: "shimmer 2s infinite linear",
+      },
+      boxShadow: {
+        glow: "var(--shadow-glow)",
       },
     },
   },
