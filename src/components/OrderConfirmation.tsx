@@ -1,5 +1,6 @@
-import { X, Info, Truck } from "lucide-react";
+import { X, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import deliveryTruck from "@/assets/delivery-truck.svg";
 
 interface OrderConfirmationProps {
   isOpen: boolean;
@@ -45,15 +46,7 @@ const OrderConfirmation = ({
 
           {/* Truck illustration */}
           <div className="flex justify-center py-4">
-            <div className="w-24 h-24 flex items-center justify-center">
-              <svg viewBox="0 0 64 64" className="w-20 h-20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 36V16a4 4 0 014-4h28a4 4 0 014 4v20" stroke="hsl(var(--accent))" strokeWidth="2" strokeLinecap="round"/>
-                <path d="M40 24h12l8 12v8H40V24z" stroke="hsl(var(--accent))" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <circle cx="16" cy="48" r="6" stroke="hsl(var(--accent))" strokeWidth="2"/>
-                <circle cx="48" cy="48" r="6" stroke="hsl(var(--accent))" strokeWidth="2"/>
-                <path d="M22 44h20M4 44h6" stroke="hsl(var(--accent))" strokeWidth="2" strokeLinecap="round"/>
-              </svg>
-            </div>
+            <img src={deliveryTruck} alt="Delivery truck" className="w-24 h-auto" />
           </div>
 
           {/* Payment notice */}
