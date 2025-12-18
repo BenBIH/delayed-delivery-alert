@@ -59,6 +59,14 @@
 
     --info: 221 100% 61%;
     --info-foreground: 0 0% 100%;
+    
+    /* Info blue variants for banners and selected states */
+    --info-bg: 213 100% 97%;           /* #eef6ff */
+    --info-border: 213 80% 90%;
+    --info-icon: 213 94% 68%;          /* rgb(96, 165, 250) */
+    --selected-bg: 213 100% 97%;       /* #eef6ff */
+    --selected-border: 213 94% 68%;
+    --selected-ring: 213 94% 68%;
 
     --border: 195 10% 85%;
     --input: 195 10% 90%;
@@ -121,6 +129,14 @@
 
     --info: 221 100% 65%;
     --info-foreground: 0 0% 100%;
+    
+    /* Info blue variants for dark mode */
+    --info-bg: 213 50% 20%;
+    --info-border: 213 60% 35%;
+    --info-icon: 213 94% 68%;
+    --selected-bg: 213 50% 20%;
+    --selected-border: 213 94% 68%;
+    --selected-ring: 213 94% 68%;
 
     --border: 185 40% 18%;
     --input: 185 40% 18%;

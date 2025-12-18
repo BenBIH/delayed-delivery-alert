@@ -191,7 +191,7 @@ const OrderApproval = ({
                     onClick={() => handleAddressSelect(addr.id)}
                     className={`p-3 rounded-lg border text-left transition-all min-w-[200px] flex-shrink-0 ${
                       selectedAddress === addr.id
-                        ? "border-primary bg-primary/5 ring-2 ring-primary/20"
+                        ? "border-[hsl(var(--selected-border))] bg-[hsl(var(--selected-bg))] ring-2 ring-[hsl(var(--selected-ring))]/20"
                         : "border-border hover:border-primary/50 hover:bg-muted/30"
                     }`}
                   >
@@ -291,7 +291,7 @@ const OrderApproval = ({
             </div>
 
             {/* Recipient data */}
-            <div className="bg-secondary/20 border border-secondary/30 rounded-lg p-4">
+            <div className="bg-[hsl(var(--info-bg))] border border-[hsl(var(--info-border))] rounded-lg p-4">
               <h4 className="font-medium text-foreground mb-2">Podaci o primaocu</h4>
               <div className="space-y-1 text-sm text-muted-foreground">
                 <p>Primaoc: <span className="text-foreground">{recipientData.name}</span></p>

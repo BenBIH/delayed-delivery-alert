@@ -166,8 +166,8 @@ const SendArticle = ({
         {!showConfirmation ? (
           <div className="p-6 space-y-6">
             {/* Info banner */}
-            <div className="bg-secondary/20 border border-secondary/30 rounded-lg p-4 flex items-center gap-3">
-              <Info className="w-5 h-5 text-secondary-foreground flex-shrink-0" />
+            <div className="bg-[hsl(var(--info-bg))] border border-[hsl(var(--info-border))] rounded-lg p-4 flex items-center gap-3">
+              <Info className="w-5 h-5 text-[hsl(var(--info-icon))] flex-shrink-0" />
               <p className="text-sm text-foreground">
                 U slučaju izmjene brojnog stanja, ili dodatnih artikala izmijenite otkupnu cijenu
               </p>
@@ -288,7 +288,7 @@ const SendArticle = ({
                     onClick={() => handleAddressSelect(addr.id)}
                     className={`p-3 rounded-lg border text-left transition-all ${
                       selectedAddress === addr.id
-                        ? "border-primary bg-primary/5 ring-2 ring-primary/20"
+                        ? "border-[hsl(var(--selected-border))] bg-[hsl(var(--selected-bg))] ring-2 ring-[hsl(var(--selected-ring))]/20"
                         : "border-border hover:border-primary/50 hover:bg-muted/30"
                     }`}
                   >
