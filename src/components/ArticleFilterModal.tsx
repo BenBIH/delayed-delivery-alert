@@ -145,47 +145,33 @@ const ArticleFilterModal: React.FC<ArticleFilterModalProps> = ({
         {/* Divider */}
         <div className="border-t border-gray-100" />
 
-        {/* Checkbox Filters */}
-        <div className="space-y-3">
-          {checkboxFilters.map((filter) => (
-            <label
-              key={filter.id}
-              className="flex items-center gap-3 cursor-pointer group"
-            >
-              <div className="relative">
-                <input
-                  type="checkbox"
-                  checked={selectedCheckboxes.includes(filter.id)}
-                  onChange={() => handleCheckboxChange(filter.id)}
-                  className="peer sr-only"
-                />
+        {/* Switch Filters */}
+        <div className="space-y-1">
+          {checkboxFilters.map((filter) => {
+            const isChecked = selectedCheckboxes.includes(filter.id);
+            return (
+              <button
+                key={filter.id}
+                onClick={() => handleCheckboxChange(filter.id)}
+                className="w-full flex items-center justify-between py-3 px-1 rounded-lg hover:bg-gray-50 transition-colors group"
+              >
+                <span className="text-sm text-gray-700 group-hover:text-[#002f34]">
+                  {filter.label}
+                </span>
                 <div
-                  className={`w-5 h-5 rounded border-2 transition-all flex items-center justify-center ${
-                    selectedCheckboxes.includes(filter.id)
-                      ? 'bg-[#002f34] border-[#002f34]'
-                      : 'border-gray-300 group-hover:border-gray-400'
+                  className={`relative w-11 h-6 rounded-full transition-colors duration-200 ${
+                    isChecked ? 'bg-[#002f34]' : 'bg-gray-200'
                   }`}
                 >
-                  {selectedCheckboxes.includes(filter.id) && (
-                    <svg
-                      className="w-3 h-3 text-white"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={3}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  )}
+                  <div
+                    className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow-sm transition-transform duration-200 ${
+                      isChecked ? 'translate-x-6' : 'translate-x-1'
+                    }`}
+                  />
                 </div>
-              </div>
-              <span className="text-sm text-gray-700">{filter.label}</span>
-            </label>
-          ))}
+              </button>
+            );
+          })}
         </div>
       </div>
 
