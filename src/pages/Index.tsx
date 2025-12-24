@@ -3,12 +3,15 @@ import DeliveryTracker from "@/components/DeliveryTracker";
 import OrderForm from "@/components/OrderForm";
 import OrderApproval from "@/components/OrderApproval";
 import SendArticle from "@/components/SendArticle";
+import SortFilterModal from "@/components/SortFilterModal";
 
 const Index = () => {
   const [isTrackerOpen, setIsTrackerOpen] = useState(false);
   const [isOrderFormOpen, setIsOrderFormOpen] = useState(false);
   const [isOrderApprovalOpen, setIsOrderApprovalOpen] = useState(false);
-  const [isSendArticleOpen, setIsSendArticleOpen] = useState(true);
+  const [isSendArticleOpen, setIsSendArticleOpen] = useState(false);
+  const [isSortOpen, setIsSortOpen] = useState(true);
+  const [selectedSort, setSelectedSort] = useState('date_desc');
 
   // Simulacija - datum zadnje izmjene statusa (postavljen na 4 dana unazad za demo)
   const lastStatusUpdate = new Date(Date.now() - 4 * 24 * 60 * 60 * 1000);
@@ -73,7 +76,25 @@ const Index = () => {
           >
             Pošalji artikal
           </button>
+          <button
+            onClick={() => setIsSortOpen(true)}
+            className="bg-[#002f34] text-white px-6 py-3 rounded-lg font-medium hover:bg-[#002f34]/90 transition-colors"
+          >
+            Sortiraj
+          </button>
         </div>
+
+        {/* Sort Filter Modal Demo */}
+        {isSortOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+            <SortFilterModal
+              isOpen={isSortOpen}
+              onClose={() => setIsSortOpen(false)}
+              selectedSort={selectedSort}
+              onSortChange={setSelectedSort}
+            />
+          </div>
+        )}
       </div>
 
       {/* Delivery Tracker Modal */}
